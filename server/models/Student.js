@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 // Define the schema
-const userSchema = new Schema({
+const studentSchema = new Schema({
   email: {
     type: String,
     required: true,
@@ -45,7 +45,7 @@ const userSchema = new Schema({
   }
 });
 
-// Create the model
-const User = mongoose.model('User', userSchema);
+// Create the model with the correct name (Student)
+const Student = mongoose.model('Student', studentSchema);
 
-module.exports = User;
+module.exports = Student;

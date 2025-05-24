@@ -1,7 +1,9 @@
+
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const dotenv = require('dotenv');
+
 
 // Load environment variables
 dotenv.config();
@@ -14,6 +16,11 @@ if (!process.env.MONGO_URL) {
 
 if (!process.env.JWT_SECRET) {
   console.error('JWT_SECRET is not defined in environment variables');
+  process.exit(1);
+}
+
+if (!process.env.OPENROUTER_API_KEY) {
+  console.error('OPENROUTER_API_KEY is not defined in environment variables');
   process.exit(1);
 }
 
@@ -33,8 +40,9 @@ mongoose.connect(process.env.MONGO_URL)
   });
 
 // Routes
-app.use('/auth', require('./routes/auth'));
-app.use('/users', require('./routes/users'));
+app.use('/api/auth', require('./routes/auth'));
+app.use('/api/users', require('./routes/users'));
+app.use('/api/chat', require('./routes/chat'));
 
 // Error handling middleware
 app.use((err, req, res, next) => {
@@ -43,8 +51,7 @@ app.use((err, req, res, next) => {
 });
 
 // Start server
-const PORT =3004;
-
+const PORT = process.env.PORT || 3002;
 
 const startServer = async () => {
   try {

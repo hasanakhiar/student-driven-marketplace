@@ -33,8 +33,8 @@ mongoose.connect(process.env.MONGO_URL)
   });
 
 // Routes
-app.use('/api/auth', require('./routes/auth'));
-app.use('/api/users', require('./routes/users'));
+app.use('/auth', require('./routes/auth'));
+app.use('/users', require('./routes/users'));
 
 // Error handling middleware
 app.use((err, req, res, next) => {
@@ -43,7 +43,8 @@ app.use((err, req, res, next) => {
 });
 
 // Start server
-const PORT = process.env.PORT || 3002;
+const PORT =3004;
+
 
 const startServer = async () => {
   try {

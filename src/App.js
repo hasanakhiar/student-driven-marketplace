@@ -6,20 +6,19 @@ import theme from './theme';
 import { AuthProvider, useAuth } from './context/AuthContext';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
-import Home from './pages/Home';
-import Login from './pages/Login';
-import Register from './pages/Register';
-import ForgotPassword from './pages/ForgotPassword';
-import ResetPassword from './pages/ResetPassword';
-import Profile from './pages/Profile';
-import Dashboard from './pages/Dashboard';
-import Settings from './pages/Settings';
-import NotFound from './pages/NotFound';
+import Home from './components/Home';
+import Login from './components/Login';
+import Register from './components/Register';
+import ForgotPassword from './components/ForgotPassword';
+import ResetPassword from './components/ResetPassword';
+import Profile from './components/Profile';
+import Dashboard from './components/Dashboard';
 import SearchSection from './components/SearchSection';
 import ListingsPage from './components/ListingsPage';
 import ListingDetail from './components/ListingDetail';
 import CreateListing from './components/CreateListing';
 import EditListing from './components/EditListing';
+import NotFound from './pages/NotFound';
 
 // Protected Route component
 const ProtectedRoute = ({ children }) => {
@@ -112,14 +111,6 @@ const AppContent = () => {
             </ProtectedRoute>
           }
         />
-        <Route
-          path="/settings"
-          element={
-            <ProtectedRoute>
-              <Settings />
-            </ProtectedRoute>
-          }
-        />
 
         {/* 404 Route */}
         <Route path="*" element={<NotFound />} />
@@ -133,11 +124,11 @@ const App = () => {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <AuthProvider>
-        <Router>
+      <Router>
+        <AuthProvider>
           <AppContent />
-        </Router>
-      </AuthProvider>
+        </AuthProvider>
+      </Router>
     </ThemeProvider>
   );
 };

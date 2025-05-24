@@ -61,7 +61,7 @@ const SearchSection = ({ onFilterChange }) => {
   const handleCategoryClick = (categoryId) => {
     const newFilters = {
       ...filters,
-      category: categoryId
+      category: String(categoryId)
     };
     setFilters(newFilters);
     navigate('/listings', { state: { filters: newFilters } });

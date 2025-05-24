@@ -7,14 +7,15 @@ const ListingGrid = ({ filters }) => {
   const location = useLocation();
   const [filteredListings, setFilteredListings] = useState([]);
 
-  // Sample listings data with advanced fields
+  // Expanded listings data with at least one for each category (1-8)
   const listings = [
+    // 1: Textbooks
     {
       id: 1,
       title: 'Calculus Textbook',
       price: 45,
       image: 'https://images.unsplash.com/photo-1589998059171-988d887df646?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60',
-      category: '1', // Textbooks
+      category: '1',
       description: 'Like new condition, used for one semester',
       listingType: 'tangible',
       pricing: 'flat',
@@ -25,11 +26,27 @@ const ListingGrid = ({ filters }) => {
       urgent: false
     },
     {
+      id: 11,
+      title: 'Physics Textbook',
+      price: 50,
+      image: 'https://images.unsplash.com/photo-1516979187457-637abb4f9353?auto=format&fit=crop&w=500&q=60',
+      category: '1',
+      description: 'Physics for Scientists and Engineers, 3rd Edition',
+      listingType: 'tangible',
+      pricing: 'flat',
+      visibility: 'all',
+      condition: 'Good',
+      location: 'Library',
+      postedDate: '2024-03-13',
+      urgent: false
+    },
+    // 2: Electronics
+    {
       id: 2,
       title: 'MacBook Pro 2019',
       price: 1200,
       image: 'https://images.unsplash.com/photo-1517336714731-489689fd1ca8?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60',
-      category: '2', // Electronics
+      category: '2',
       description: 'Excellent condition, comes with original box',
       listingType: 'tangible',
       pricing: 'bidding',
@@ -40,11 +57,27 @@ const ListingGrid = ({ filters }) => {
       urgent: true
     },
     {
+      id: 12,
+      title: 'Bluetooth Headphones',
+      price: 80,
+      image: 'https://images.unsplash.com/photo-1511367461989-f85a21fda167?auto=format&fit=crop&w=500&q=60',
+      category: '2',
+      description: 'Noise-cancelling, wireless, black',
+      listingType: 'tangible',
+      pricing: 'flat',
+      visibility: 'university',
+      condition: 'Like New',
+      location: 'Dormitory',
+      postedDate: '2024-03-16',
+      urgent: false
+    },
+    // 3: Furniture
+    {
       id: 3,
       title: 'Office Chair',
       price: 80,
       image: 'https://images.unsplash.com/photo-1505843490538-5133c6c7d0e1?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60',
-      category: '3', // Furniture
+      category: '3',
       description: 'Ergonomic office chair, barely used',
       listingType: 'tangible',
       pricing: 'flat',
@@ -55,26 +88,58 @@ const ListingGrid = ({ filters }) => {
       urgent: false
     },
     {
-      id: 4,
-      title: 'Math Tutoring',
-      price: 20,
-      image: 'https://images.unsplash.com/photo-1546519638-68e109acd27b?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60',
-      category: '1', // Textbooks (for demo)
-      description: 'Tutoring for calculus and algebra',
-      listingType: 'tutoring',
-      pricing: 'hourly',
+      id: 13,
+      title: 'Study Desk',
+      price: 60,
+      image: 'https://images.unsplash.com/photo-1515378791036-0648a3ef77b2?auto=format&fit=crop&w=500&q=60',
+      category: '3',
+      description: 'Wooden desk, perfect for students',
+      listingType: 'tangible',
+      pricing: 'flat',
       visibility: 'all',
-      condition: 'N/A',
-      location: 'Online',
-      postedDate: '2024-03-18',
+      condition: 'Used',
+      location: 'South Campus',
+      postedDate: '2024-03-11',
       urgent: false
     },
+    // 4: Sports
+    {
+      id: 14,
+      title: 'Basketball',
+      price: 25,
+      image: 'https://images.unsplash.com/photo-1546519638-68e109acd27b?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60',
+      category: '4',
+      description: 'Official size and weight, good condition',
+      listingType: 'tangible',
+      pricing: 'flat',
+      visibility: 'all',
+      condition: 'Good',
+      location: 'Sports Complex',
+      postedDate: '2024-03-09',
+      urgent: false
+    },
+    {
+      id: 15,
+      title: 'Tennis Racket',
+      price: 40,
+      image: 'https://images.unsplash.com/photo-1517649763962-0c623066013b?auto=format&fit=crop&w=500&q=60',
+      category: '4',
+      description: 'Wilson Pro Staff, lightly used',
+      listingType: 'tangible',
+      pricing: 'flat',
+      visibility: 'university',
+      condition: 'Like New',
+      location: 'Sports Complex',
+      postedDate: '2024-03-08',
+      urgent: false
+    },
+    // 5: Musical Instruments
     {
       id: 5,
       title: 'Guitar Lessons',
       price: 30,
       image: 'https://images.unsplash.com/photo-1510915361894-db8b60106cb1?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60',
-      category: '5', // Musical Instruments
+      category: '5',
       description: 'Skill exchange: guitar lessons for language practice',
       listingType: 'skill',
       pricing: 'hourly',
@@ -85,11 +150,27 @@ const ListingGrid = ({ filters }) => {
       urgent: false
     },
     {
+      id: 16,
+      title: 'Acoustic Guitar',
+      price: 350,
+      image: 'https://images.unsplash.com/photo-1510915361894-db8b60106cb1?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60',
+      category: '5',
+      description: 'Yamaha acoustic guitar, includes case',
+      listingType: 'tangible',
+      pricing: 'flat',
+      visibility: 'all',
+      condition: 'Used',
+      location: 'Music Room',
+      postedDate: '2024-03-07',
+      urgent: false
+    },
+    // 6: Art Supplies
+    {
       id: 6,
       title: 'Art Supplies Set',
       price: 75,
       image: 'https://images.unsplash.com/photo-1513364776144-60967b0f800f?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60',
-      category: '6', // Art Supplies
+      category: '6',
       description: 'Complete set of professional art supplies',
       listingType: 'tangible',
       pricing: 'flat',
@@ -98,6 +179,114 @@ const ListingGrid = ({ filters }) => {
       location: 'Art Studio',
       postedDate: '2024-03-14',
       urgent: true
+    },
+    {
+      id: 17,
+      title: 'Watercolor Paints',
+      price: 20,
+      image: 'https://images.unsplash.com/photo-1464983953574-0892a716854b?auto=format&fit=crop&w=500&q=60',
+      category: '6',
+      description: '24-color set, barely used',
+      listingType: 'tangible',
+      pricing: 'flat',
+      visibility: 'university',
+      condition: 'Like New',
+      location: 'Art Studio',
+      postedDate: '2024-03-13',
+      urgent: false
+    },
+    // 7: Lab Equipment
+    {
+      id: 18,
+      title: 'Microscope',
+      price: 200,
+      image: 'https://images.unsplash.com/photo-1517971071642-34a2d3eccb5e?auto=format&fit=crop&w=500&q=60',
+      category: '7',
+      description: 'Compound microscope, 1000x magnification',
+      listingType: 'tangible',
+      pricing: 'flat',
+      visibility: 'all',
+      condition: 'Good',
+      location: 'Science Lab',
+      postedDate: '2024-03-06',
+      urgent: false
+    },
+    {
+      id: 19,
+      title: 'Lab Coat',
+      price: 15,
+      image: 'https://images.unsplash.com/photo-1512436991641-6745cdb1723f?auto=format&fit=crop&w=500&q=60',
+      category: '7',
+      description: 'White, size M, never used',
+      listingType: 'tangible',
+      pricing: 'flat',
+      visibility: 'university',
+      condition: 'New',
+      location: 'Science Lab',
+      postedDate: '2024-03-05',
+      urgent: false
+    },
+    // 8: Stationery
+    {
+      id: 20,
+      title: 'Stationery Bundle',
+      price: 10,
+      image: 'https://images.unsplash.com/photo-1515378791036-0648a3ef77b2?auto=format&fit=crop&w=500&q=60',
+      category: '8',
+      description: 'Pens, pencils, highlighters, sticky notes',
+      listingType: 'tangible',
+      pricing: 'flat',
+      visibility: 'all',
+      condition: 'New',
+      location: 'Bookstore',
+      postedDate: '2024-03-04',
+      urgent: false
+    },
+    {
+      id: 21,
+      title: 'Graph Paper Pads',
+      price: 5,
+      image: 'https://images.unsplash.com/photo-1464983953574-0892a716854b?auto=format&fit=crop&w=500&q=60',
+      category: '8',
+      description: 'Pack of 5, A4 size',
+      listingType: 'tangible',
+      pricing: 'flat',
+      visibility: 'university',
+      condition: 'New',
+      location: 'Bookstore',
+      postedDate: '2024-03-03',
+      urgent: false
+    },
+    // Tutoring/Skill Exchange for demo
+    {
+      id: 22,
+      title: 'Math Tutoring',
+      price: 20,
+      image: 'https://images.unsplash.com/photo-1546519638-68e109acd27b?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60',
+      category: '1',
+      description: 'Tutoring for calculus and algebra',
+      listingType: 'tutoring',
+      pricing: 'hourly',
+      visibility: 'all',
+      condition: 'N/A',
+      location: 'Online',
+      postedDate: '2024-03-18',
+      urgent: false
+    },
+    {
+      id: 23,
+      title: 'Language Exchange',
+      price: 0,
+      image: 'https://images.unsplash.com/photo-1510915361894-db8b60106cb1?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60',
+      category: '5',
+      description: 'Skill exchange: English for Spanish',
+      listingType: 'skill',
+      pricing: 'hourly',
+      visibility: 'all',
+      condition: 'N/A',
+      location: 'Online',
+      postedDate: '2024-03-17',
+      urgent: false
     }
   ];
 

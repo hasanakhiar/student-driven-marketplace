@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import ListingGrid from './ListingGrid';
 
 const categories = [
@@ -60,6 +60,14 @@ const ListingsPage = ({ initialFilters = {}, onLoginModal }) => {
     urgent: false,
   });
   const [showAdvanced, setShowAdvanced] = useState(false);
+
+  // Update filters if initialFilters change (e.g., on navigation)
+  useEffect(() => {
+    setFilters((prev) => ({
+      ...prev,
+      ...initialFilters
+    }));
+  }, [initialFilters]);
 
   // Reset all filters
   const handleResetFilters = () => {
